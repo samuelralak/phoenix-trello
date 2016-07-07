@@ -32,6 +32,6 @@
 
     </div>  /container -->
     <main id="main_container" role="main"></main>
-    <script src="<%= static_path(@conn, "/js/application.js") %>"></script>
+    <script src='<%= static_path(@conn, "/js/application.js") %>'></script>
   </body>
 </html>

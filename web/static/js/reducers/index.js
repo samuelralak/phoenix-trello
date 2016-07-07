@@ -1,8 +1,8 @@
 import { combineReducers }  from 'redux';
-import { routeReducer }     from 'redux-simple-router';
+import { routeReducer }     from 'react-router-redux';
 import session              from './session';
 
 export default combineReducers({
-  routing: routeReducer,
+  routing: routerReducer,
   session: session,
 });
