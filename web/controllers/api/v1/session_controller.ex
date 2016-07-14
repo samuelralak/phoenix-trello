@@ -6,7 +6,7 @@ defmodule PhoenixTrello.SessionController do
   plug :scrub_params, "session" when action in [:create]
 
   def create(conn, %{"session" => session_params}) do
-  	case PhoenixTrello.Session.authenticat(session_params) do
+  	case PhoenixTrello.Session.authenticate(session_params) do
       {:ok, user} ->
         {:ok, jwt, _full_claims} = user |> Guardian.encode_and_sign(:token)
 
