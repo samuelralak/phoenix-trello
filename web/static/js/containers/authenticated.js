@@ -1,20 +1,35 @@
-import React            from 'React';
+import React            from 'react';
 import { connect }      from 'react-redux';
-import { routeActions } from 'redux-simple-router';
+// import { routeActions } from 'redux-simple-router';
+import { push }   			from 'react-router-redux';
 
 class AuthenticatedContainer extends React.Component {
 	componentDidMount() {
 		const { dispatch, currentUser } = this.props;
+		const phoenixAuthToken = localStorage.getItem('phoenixAuthToken');
 
-		if (localStorage.getItem('phoenixAuthToken')) {
+		if (phoenixAuthToken && !currentUser) {
 			dispatch(Actions.currentUser());
-		} else {
-			dispatch(routeActions.push('/sign_up'));
+		} else if (!phoenixAuthToken) {
+			dispatch(push('/sign_in'));
 		}
 	}
 
 	render() {
-		// ...
+		const { currentUser, dispatch } = this.props;
+
+		if (!currentUser) return false;
+
+		return(
+			<div className="application-container">
+				<Header 
+					currentUser={currentUser}
+					dispatch={dispatch} />
+				<div className="main-container">
+					{this.props.children}
+				</div>
+			</div>
+		);
 	}
 }
 
