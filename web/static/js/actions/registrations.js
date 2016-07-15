@@ -22,7 +22,7 @@ Actions.signUp = (data) => {
 			error.response.json()
 			.then((errorJSON) => {
 				dispatch({
-					type: Constants.REGISTRATION_ERROR,
+					type: Constants.REGISTRATIONS_ERROR,
 					errors: errorJSON.errors
 				});
 			});

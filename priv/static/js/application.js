@@ -26793,11 +26793,16 @@
 	
 	var _session2 = _interopRequireDefault(_session);
 	
+	var _registration = __webpack_require__(278);
+	
+	var _registration2 = _interopRequireDefault(_registration);
+	
 	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 	
 	exports.default = (0, _redux.combineReducers)({
 	  routing: _reactRouterRedux.routerReducer,
-	  session: _session2.default
+	  session: _session2.default,
+	  registration: _registration2.default
 	});
 
 /***/ },
@@ -28160,7 +28165,7 @@
 		if (!errors) return false;
 	
 		return errors.map(function (error, i) {
-			if (errors[ref]) {
+			if (error[ref]) {
 				return _react2.default.createElement(
 					'div',
 					{ key: i, className: 'error' },
@@ -28629,7 +28634,7 @@
 /* 270 */
 /***/ function(module, exports, __webpack_require__) {
 
-	var __WEBPACK_AMD_DEFINE_RESULT__;var require;/* WEBPACK VAR INJECTION */(function(process, global, module) {/*!
+	var require;var __WEBPACK_AMD_DEFINE_RESULT__;/* WEBPACK VAR INJECTION */(function(process, global, module) {/*!
 	 * @overview es6-promise - a tiny implementation of Promises/A+.
 	 * @copyright Copyright (c) 2014 Yehuda Katz, Tom Dale, Stefan Penner and contributors (Conversion to ES6 API by Jake Archibald)
 	 * @license   Licensed under MIT license
@@ -29657,7 +29662,7 @@
 			}).catch(function (error) {
 				error.response.json().then(function (errorJSON) {
 					dispatch({
-						type: _constants2.default.REGISTRATION_ERROR,
+						type: _constants2.default.REGISTRATIONS_ERROR,
 						errors: errorJSON.errors
 					});
 				});
@@ -30906,6 +30911,43 @@
 	
 	})( false ? window.Phoenix = window.Phoenix || {} : exports);
 
+
+/***/ },
+/* 278 */
+/***/ function(module, exports, __webpack_require__) {
+
+	'use strict';
+	
+	Object.defineProperty(exports, "__esModule", {
+		value: true
+	});
+	
+	var _extends = Object.assign || function (target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i]; for (var key in source) { if (Object.prototype.hasOwnProperty.call(source, key)) { target[key] = source[key]; } } } return target; };
+	
+	exports.default = reducer;
+	
+	var _constants = __webpack_require__(249);
+	
+	var _constants2 = _interopRequireDefault(_constants);
+	
+	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+	
+	var initialState = {
+		errors: null
+	};
+	
+	function reducer() {
+		var state = arguments.length <= 0 || arguments[0] === undefined ? initialState : arguments[0];
+		var action = arguments.length <= 1 || arguments[1] === undefined ? {} : arguments[1];
+	
+		switch (action.type) {
+			case _constants2.default.REGISTRATIONS_ERROR:
+				return _extends({}, state, { errors: action.errors });
+	
+			default:
+				return state;
+		}
+	}
 
 /***/ }
 /******/ ]);
